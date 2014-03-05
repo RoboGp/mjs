@@ -1,5 +1,5 @@
 %{
-Robot simulator V0.02
+Robot simulator V0.03
 If you have any suggestions for fixes or improvements contact Austin Gregg-Smith ag7751@bristol.ac.uk
 %}
 
@@ -12,17 +12,17 @@ classdef BotSim < handle
         inpolygonMapformatY; %The map stored as a polygon for the insidepoly function
         pos;    %position of the robot
         ang;    %angle of the robot (radians)
-        dir;    %angle of the robot (stored as 2d vector)
+        dir;    %angle of the robot (stored as 2D unit vector)
     end
     %public properties
     properties
-        unmodifiedMap;
-        scanOffset
+        unmodifiedMap;  %stores the map in the default format provided on the course
+        scanOffset;     %stores the offset of center of rotation of the simulated ultrasound
         scanConfig;     %stores how the robot performs a scan (number of points, angle between points)
         scanLines;      %the scan configuration stored as 2d lines
-        sensorNoise     %how much noise to add to a scan
-        motionNoise     %how much noise when moving
-        turningNoise    %how much noise when turning
+        sensorNoise     %Error standard deviation in cm
+        motionNoise     %cm error stdDev per unit length in cm/cm
+        turningNoise    %Radian stdDev error per radian rad/rad
     end
     
     methods
@@ -125,7 +125,7 @@ classdef BotSim < handle
             %generates a simple 360 deg scan configuration.  You can set
             %the number of scans to take.
             %this function could be static but is not for simplicity
-            %(no other functions are static and it may be confusing)
+            %(no other functions are static and it may be confusing)            
             startAngle =0;
             endAngle = 2*pi;
             i= startAngle:abs(startAngle-endAngle)/samples:startAngle+endAngle- abs(startAngle-endAngle)/samples;
@@ -157,6 +157,9 @@ classdef BotSim < handle
         end
         
         function setScanConfig(bot,config,offsets)
+            if nargin <3
+               offsets = [0 0];
+            end
             bot.scanConfig = config;
             bot.scanOffset = offsets;
             bot.updateScanLines(0,1);

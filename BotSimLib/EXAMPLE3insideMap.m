@@ -4,8 +4,8 @@ clear all;
 map =[0,0;60,0;60,45;45,45;45,59;106,59;106,105;0,105];
 botSim = BotSim(map);
 
-disp('You can use the pointInsideMap() function to sample the map vectors to');
-disp('make a grid representation of the map for pathfinding');
+disp('You can use the pointInsideMap() function to sample the map vectors');
+disp('to make a grid representation of the map for pathfinding');
 
 hold on;
 botSim.drawMap();

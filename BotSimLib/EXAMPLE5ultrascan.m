@@ -3,8 +3,8 @@ clf;        %clears figures
 clc;        %clears console
 clear;      %clears workspace
 
-COM_CloseNXT all;
-h=COM_OpenNXT();
+COM_CloseNXT all;  
+h = COM_OpenNXT();
 COM_SetDefaultNXT(h);
 
 OpenUltrasonic(SENSOR_4); %open usensor on port 4
