@@ -13,6 +13,11 @@ classdef BotSim < handle
         pos;    %position of the robot
         ang;    %angle of the robot (radians)
         dir;    %angle of the robot (stored as 2D unit vector)
+	weight;
+	distance;
+	o_distance;
+	crossingPoint;
+	
     end
     %public properties
     properties
