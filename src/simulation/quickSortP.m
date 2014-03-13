@@ -1,7 +1,7 @@
 %---------------------------------------------------
 % NORMALIZE & SORT
 %---------------------------------------------------
-function quickSort(particle, l, r)
+function quickSortP(particle, l, r)
 
   if (r == l) 
     return;
@@ -18,8 +18,8 @@ function quickSort(particle, l, r)
   end
   
   swapParticles(particle, l, i-1);
-  quickSort(particle, l, i-1);
-  quickSort(particle, i, r);
+  quickSortP(particle, l, i-1);
+  quickSortP(particle, i, r);
 
 end
 

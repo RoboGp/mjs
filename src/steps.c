@@ -34,3 +34,44 @@ Initialise 200 weights.
 
 Distance is column wise.
 (row, column)
+
+
+07-03-14
+----------
+// TODO
+1. Test to set proper threshold for convergence.
+   Example: If no. of particles whose cumulative weights > 0.9 is above a particular value, stop!
+   
+Shortest Path
+-------------
+
+Eliminated the wrong lines
+----------------------------
+robot == rob
+a,b,c,d,e,f
+1. Connect rob-a rob-b, rob-c, rob-d, rob-e, rob-f
+2. Check if rob-a intersects a-b, b-c, c-d, d-e, e-f ... and so on.
+3. If rob-a intersects c-d, d-e
+4. Sort c-d, d-e
+   = find intersection point between rob-a and c-d == X (intersection)
+   = find distance between rob and X
+5. If the nearest intersction point is a (what we're looking for) then the rob-a is valid.
+   
+==> We now have a graph!
+Shortest path
+   
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+

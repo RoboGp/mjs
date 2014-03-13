@@ -13,10 +13,6 @@ classdef BotSim < handle
         pos;    %position of the robot
         ang;    %angle of the robot (radians)
         dir;    %angle of the robot (stored as 2D unit vector)
-	weight;
-	distance;
-	o_distance;
-	crossingPoint;
 	
     end
     %public properties
@@ -28,6 +24,11 @@ classdef BotSim < handle
         sensorNoise     %Error standard deviation in cm
         motionNoise     %cm error stdDev per unit length in cm/cm
         turningNoise    %Radian stdDev error per radian rad/rad
+	weight;
+	distance;
+	o_distance;
+	cp;		% Crossing point
+
     end
     
     methods

@@ -3,7 +3,7 @@
 %---------------------------------------------------
 function scan(robot, particle, nparticles)
 
-  [robot.distance robot.crossingPoint]  = robot.ultraScan();
+  [robot.distance robot.cp]  = robot.ultraScan();
 
   for i = 1:nparticles
     [particle(i).distance particle(i).cp]  = particle(i).ultraScan();

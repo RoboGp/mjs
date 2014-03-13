@@ -1,0 +1,5 @@
+1. Motors do not start and stop at the same time
+
+
+Simulation
+1. Figuring out the right nscans so that the circular-shift error is minimal.
