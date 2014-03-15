@@ -2,13 +2,13 @@
 % ROULETTE-WHEEL SELECTION
 % Cumulative Sum
 %---------------------------------------------------
-function rouletteSelection(particle, nparticles)
+function tmp_particle = rouletteSelection(particle, nparticles, nscans, map)
 
   running_sum = 0;
   c_sum = zeros(nparticles);
-
+  
   for j = 1:nparticles
-    running_sum += particle(j).weight;
+    running_sum = running_sum + particle(j).weight;
     c_sum(j) = running_sum;
   end
 
@@ -23,9 +23,17 @@ function rouletteSelection(particle, nparticles)
       end
     end
     
-    tmp_particle(j) = particle(sel_index);
+    tmp_particle(j) = BotSim(map);
+    tmp_particle(j).weight = particle(sel_index).weight;
+    tmp_particle(j).distance = particle(sel_index).distance;
+    tmp_particle(j).o_distance = particle(sel_index).o_distance;
+    tmp_particle(j).setBotPos(particle(sel_index).getBotPos() + rand());
+    tmp_particle(j).setBotAng(particle(sel_index).getBotAng());
+    
+    tmp_particle(j).setScanConfig(tmp_particle(j).generateScanConfig(nscans));
+
   end
   
-  particle = tmp_particle;
-
 end
+
+

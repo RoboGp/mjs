@@ -1,25 +1,15 @@
 %---------------------------------------------------
 % NORMALIZE & SORT
 %---------------------------------------------------
-function quickSortP(particle, l, r)
+function particle = quickSortP(particle, nparticles)
 
-  if (r == l) 
-    return;
+  w = zeros(nparticles, 1);
+  for i = 1:nparticles
+    w(i) = particle(i).weight;
   end
-  
-  pivot = particle(l);
-  i = l+1;
-  
-  for j = l+1:r 
-    if(particle(j).weight < pivot.weight) 
-      swapParticles(particle, i, j);      
-      i++;
-    end
-  end
-  
-  swapParticles(particle, l, i-1);
-  quickSortP(particle, l, i-1);
-  quickSortP(particle, i, r);
+
+  [sort_w ind] = sort(w);
+  particle = particle(ind);
 
 end
 

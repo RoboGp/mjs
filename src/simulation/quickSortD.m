@@ -23,4 +23,15 @@ function quickSortD(ilist, l, r)
 
 end
 
+function particle = quickSortP(ilist, num)
+
+  w = zeros(num, 1);
+  for i = 1:num
+    w(i) = ilist(i)
+  end
+
+  [sort_w ind] = sort(w);
+  particle = particle(ind);
+
+end
 

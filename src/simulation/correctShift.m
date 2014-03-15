@@ -6,7 +6,7 @@
 function correctShift(robot, particle, nscans, nparticles)
 
   for j = 1:nparticles
-    min_err = 99999;
+    min_err = inf;
     angle = 0;
     for i = 1:nscans
       diff = robot.distance - particle(j).distance;
@@ -22,12 +22,8 @@ function correctShift(robot, particle, nscans, nparticles)
     end
 	
     angle = (angle - 1) * (360/nscans);
-    [j angle min_err]
-    
-    
-%      angle = degtorad(angle);
-%      particle(j).setBotAng(particle(j).getBotAng() + angle);
-%      particle(j).drawBot(3);
+    angle = degtorad(angle);
+    particle(j).setBotAng(particle(j).getBotAng() - angle);
 
   end
   

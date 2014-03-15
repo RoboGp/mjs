@@ -62,7 +62,28 @@ Shortest path
    
 
 
+Move
+-----
+0-45-90-135-180-225-270-315-360
 
+
+angle = random
+
+dist = 10
+
+while(in map)
+  if yes, move!
+  if no, turn by 5
+
+    
+moveAll()
+----------
+find good angle, distance for robot
+move robot
+
+for each particle
+  check if movement is valid for particle
+  move particle
 
 
 

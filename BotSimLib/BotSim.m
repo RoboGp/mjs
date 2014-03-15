@@ -8,8 +8,6 @@ classdef BotSim < handle
     properties (SetAccess = private,GetAccess = private)
         map;    %map coordinates with a copy of the first coordiantes at the end
         mapLines;   %The map stored as a list of lines (for easy line interection)
-        inpolygonMapformatX; %The map stored as a polygon for the insidepoly function
-        inpolygonMapformatY; %The map stored as a polygon for the insidepoly function
         pos;    %position of the robot
         ang;    %angle of the robot (radians)
         dir;    %angle of the robot (stored as 2D unit vector)
@@ -24,6 +22,8 @@ classdef BotSim < handle
         sensorNoise     %Error standard deviation in cm
         motionNoise     %cm error stdDev per unit length in cm/cm
         turningNoise    %Radian stdDev error per radian rad/rad
+        inpolygonMapformatX; %The map stored as a polygon for the insidepoly function
+        inpolygonMapformatY; %The map stored as a polygon for the insidepoly function
 	weight;
 	distance;
 	o_distance;

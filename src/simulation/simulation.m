@@ -10,31 +10,39 @@ axis equal;
 % GLOBAL VARIABLES
 %---------------------------------------------------
 nscans = 360;
-nparticles = 10;
+nparticles = 1;
 check = 0;
 
-[robot particle] = init(20, 40, 0, nscans, nparticles, map);
+[robot particle] = init(20, 40, 10, nscans, nparticles, map);
 
 %  for i = 1:inf
-  scan(robot, particle, nparticles);
 
-%    figure();
-%    hold on;
-%    robot.drawMap();
-%    robot.drawBot(3);
+  for i = 1:6
+    scan(robot, particle, nparticles);
+%      correctShift(robot, particle, nscans, nparticles);
+%      total_weight = assignWeights(robot, particle, nscans, nparticles);
+%      particle = quickSortP(particle, nparticles);
+    
+    'After Roulette Selection'
+%      particle = rouletteSelection(particle, nparticles, nscans, map);
+%      total_weight = assignWeights(robot, particle, nscans, nparticles);
+
+    figure();
+    hold on;
+    robot.drawMap();
+    
+    moveAll(robot, particle, nparticles);
+    robot.getBotPos()
+    robot.drawBot(3);
+    
+    for j = 1:nparticles
+      particle(j).drawBot(3);
+    end
   
-  correctShift(robot, particle, nscans, nparticles);
-%    [robot.distance particle(1).o_distance]
-%    particle(1).drawScanConfig();  %draws the scan configuration to verify it is correct      
-%    particle(2).drawScanConfig();  %draws the scan configuration to verify it is correct      
-
+    hold off;
+  end
 
   
-%    assignWeights(robot, particle, nscans, nparticles);
-%  
-%    quickSortP(particle, 1, nparticles);
-%    rouletteSelection(particle, nparticles);
-%    
 %    check = checkConvg(particle, nparticles);
 %  end
 %  

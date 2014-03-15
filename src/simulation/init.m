@@ -23,7 +23,7 @@ function [robot particle] = init(x, y, theta, nscans, nparticles, map)
       particle(i).o_distance = zeros(nscans, 1);
       particle(i).randomPose(5); %at least 5cm from the wall
       
-      particle(i).setBotPos([x y]);
+%        particle(i).setBotPos([x y]);
       angle = radtodeg(particle(i).getBotAng());
       angle = round(angle);
       angle = degtorad(angle);
