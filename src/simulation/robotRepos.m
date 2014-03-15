@@ -2,7 +2,7 @@ function [angle distance] = robotRepos(robot)
 
   INSIDE_MAP = 1;
   
-  distance = 30;
+  distance = 10;
   turn_angle =  0.0873;
   
   angle = rand() * 360;

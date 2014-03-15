@@ -7,7 +7,6 @@ classdef BotSim < handle
     % The following properties can be set only by class methods
     properties (SetAccess = private,GetAccess = private)
         map;    %map coordinates with a copy of the first coordiantes at the end
-        mapLines;   %The map stored as a list of lines (for easy line interection)
         pos;    %position of the robot
         ang;    %angle of the robot (radians)
         dir;    %angle of the robot (stored as 2D unit vector)
@@ -15,7 +14,8 @@ classdef BotSim < handle
     end
     %public properties
     properties
-        unmodifiedMap;  %stores the map in the default format provided on the course
+	mapLines;   %The map stored as a list of lines (for easy line interection)
+	unmodifiedMap;  %stores the map in the default format provided on the course
         scanOffset;     %stores the offset of center of rotation of the simulated ultrasound
         scanConfig;     %stores how the robot performs a scan (number of points, angle between points)
         scanLines;      %the scan configuration stored as 2d lines
@@ -193,8 +193,12 @@ classdef BotSim < handle
             line(bot.map(:,1),bot.map(:,2),'lineWidth',2,'Color','r'); % draws arena
         end
         
-        function drawBot(bot,lineLength)
-            plot(bot.pos(1),bot.pos(2),'o');
+        function drawBot(bot,lineLength, option)
+	    if(option == 1)
+	      plot(bot.pos(1),bot.pos(2), 'go', 'MarkerSize', 20);
+	    else
+	      plot(bot.pos(1),bot.pos(2), 'bo', 'MarkerSize', 10);
+	    end
             line([bot.pos(1) bot.pos(1)+bot.dir(1)*lineLength],[bot.pos(2) bot.pos(2)+bot.dir(2)*lineLength]);
         end
         

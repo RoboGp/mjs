@@ -13,7 +13,7 @@ function [robot particle] = init(x, y, theta, nscans, nparticles, map)
   robot.setScanConfig(robot.generateScanConfig(nscans));  %sets the scan configuration on the botSim.  
 
   robot.drawMap();
-  robot.drawBot(3);
+  robot.drawBot(3, 1);
 
   % Initialise nparticles
   for i = 1:nparticles
@@ -29,7 +29,7 @@ function [robot particle] = init(x, y, theta, nscans, nparticles, map)
       angle = degtorad(angle);
       particle(i).setBotAng(angle);
       
-      particle(i).drawBot(3);
+      particle(i).drawBot(3, 0);
       particle(i).setScanConfig(particle(i).generateScanConfig(nscans));
   end
 end

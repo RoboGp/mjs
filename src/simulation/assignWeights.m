@@ -17,11 +17,11 @@ function total_weight = assignWeights(robot, particle, nscans, nparticles)
     total_weight = total_weight + particle(j).weight;
   end
   
-%    temp = 0;
-%    for j = 1:nparticles
-%      particle(j).weight = particle(j).weight / total_weight;
-%      temp = temp + particle(j).weight;
-%    end
-%   
-%   temp
+  temp = 0;
+  for j = 1:nparticles
+    particle(j).weight = particle(j).weight / total_weight;
+    temp = temp + particle(j).weight;
+  end
+ 
+ temp
 end

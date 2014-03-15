@@ -9,6 +9,7 @@ function particle = quickSortP(particle, nparticles)
   end
 
   [sort_w ind] = sort(w);
+
   particle = particle(ind);
 
 end

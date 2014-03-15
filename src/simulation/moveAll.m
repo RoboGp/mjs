@@ -8,11 +8,11 @@ function moveAll(robot, particle, nparticles)
   robot.turn(angle);
   robot.move(distance);
   
-%    for i = 1:nparticles
-%      if (checkPoint(particle(i), angle, distance) == INSIDE_MAP)
-%        particle(i).move(distance);
-%        particle(i).turn(angle);
-%      end
-%    end
+  for i = 1:nparticles
+    if (checkPoint(particle(i), angle, distance) == INSIDE_MAP)
+      particle(i).turn(angle);
+      particle(i).move(distance);
+    end
+  end
 
 end
