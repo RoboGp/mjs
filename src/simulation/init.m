@@ -1,36 +1,33 @@
 %---------------------------------------------------
 % INITIALISATION
 %---------------------------------------------------
-% Initialise robot
-function [robot particle] = init(x, y, theta, nscans, nparticles, map)
 
-  robot = BotSim(map);
-  robot.setBotPos([x y]);
-  robot.setBotAng(degtorad(theta));
-  robot.weight = 0;
-  robot.distance = zeros(nscans, 1);
-  robot.o_distance = zeros(nscans, 1); 
-  robot.setScanConfig(robot.generateScanConfig(nscans));  %sets the scan configuration on the botSim.  
+setMap;
+drawMap;
 
-  robot.drawMap();
-  robot.drawBot(3, 1);
+% Initialise Robot
+r_pos = [20 40];
+r_ang = degtorad(90);
+r_dir = [cos(r_ang) sin(r_ang)];
 
-  % Initialise nparticles
-  for i = 1:nparticles
-      particle(i) = BotSim(map);
-      particle(i).weight = 0;
-      particle(i).distance = zeros(nscans, 1);
-      particle(i).o_distance = zeros(nscans, 1);
-      particle(i).randomPose(5); %at least 5cm from the wall
-      
-%        particle(i).setBotPos([x y]);
-      angle = radtodeg(particle(i).getBotAng());
-      angle = round(angle);
-      angle = degtorad(angle);
-      particle(i).setBotAng(angle);
-      
-      particle(i).drawBot(3, 0);
-      particle(i).setScanConfig(particle(i).generateScanConfig(nscans));
-  end
+option = DRAW_ROBOT;
+drawBot;
+
+% Iniitialise Particles
+scanOffset = [0 0];
+generateScanConfig;			% sets scanConfig
+
+sensorNoise = 0;  %constant noise model. Error standard deviation in cm
+motionNoise = 0;  %proportional noise model. cm error stdDev per unit length in cm/cm
+turningNoise = 0; %porportional noise model. Radian stdDev error per radian rad/rad
+
+
+option = DRAW_PARTICLE;
+min_wall_dist = 5;
+
+for ind = 1:nparticles
+  randomPose;
+  weight(ind) = 0;
+  drawBot;
 end
 

@@ -44,22 +44,43 @@
 %  
 %  robot.drawBot(3);
 
+  clc
+%    map =[0,0;60,0;60,45;45,45;45,59;106,59;106,105;0,105];
+%  
+%    inpolygonMapformatX = cat(1, map(:,1), map(1,1));
+%    inpolygonMapformatY = cat(1,map(:,2), map(1,2));
+%    
+%    'before'
+%    map
+%    map(length(map)+1,:)= map(1,:);
+%    'after'
+%    map
+%    
+%    '------------'
+%    map_lines = zeros(length(map)-1,4);
+%    for i =1:size(map_lines,1)
+%      map_lines(i,:) = [map(i,:) map(i+1,:)] ;
+%    end
+%    
+%    map_lines
+%    
+%    
+%    
+%    
+  innerRad = 0;
+  outerRad = 1;
+  pos = [20 40];
+  
+  ang = pi;
+  scanOffset = [0 0];
+  scanConfig = generateScanConfig(20);
 
-infVec1Point1 = [2 2];
-infVec1Point2 = [3 2];
- infVec1 = [infVec1Point1 infVec1Point2];
- line2Point1 = [0 0];
- line2Point2 = [0 3];
- line2 = [line2Point1 line2Point2];
-
-intersection(infVec1,line2)
-%INTERSECTION calculates the intersection point between an infinite vector
-%and a bounded line
-%   infVec1Point1 = [0 0];
-%   infVec1Point2 = [1 2];
-%   infVec1 = [infVec1Point1 infVec1Point2];
-%   line2Point1 = [2 3];
-%   line2Point2 = [1 0];
-%   line2 = [line2Point1 line2Point2];
-%   crossingpoint = [1.5 3];
-
+  transMat = createTransMat(pos) * createRotMat(ang) * createTransMat(scanOffset);
+    
+  scanCenter = translate(scanConfig*innerRad, transMat);
+  
+  
+  scans =  translate(scanConfig*outerRad, transMat);
+  scans
+  scanLines = cat(2, scanCenter, scans);
+  scanLines

@@ -7,22 +7,28 @@ classdef BotSim < handle
     % The following properties can be set only by class methods
     properties (SetAccess = private,GetAccess = private)
         map;    %map coordinates with a copy of the first coordiantes at the end
-        mapLines;   %The map stored as a list of lines (for easy line interection)
-        inpolygonMapformatX; %The map stored as a polygon for the insidepoly function
-        inpolygonMapformatY; %The map stored as a polygon for the insidepoly function
         pos;    %position of the robot
         ang;    %angle of the robot (radians)
         dir;    %angle of the robot (stored as 2D unit vector)
+	
     end
     %public properties
     properties
-        unmodifiedMap;  %stores the map in the default format provided on the course
+	mapLines;   %The map stored as a list of lines (for easy line interection)
+	unmodifiedMap;  %stores the map in the default format provided on the course
         scanOffset;     %stores the offset of center of rotation of the simulated ultrasound
         scanConfig;     %stores how the robot performs a scan (number of points, angle between points)
         scanLines;      %the scan configuration stored as 2d lines
         sensorNoise     %Error standard deviation in cm
         motionNoise     %cm error stdDev per unit length in cm/cm
         turningNoise    %Radian stdDev error per radian rad/rad
+        inpolygonMapformatX; %The map stored as a polygon for the insidepoly function
+        inpolygonMapformatY; %The map stored as a polygon for the insidepoly function
+	weight;
+	distance;
+	o_distance;
+	cp;		% Crossing point
+
     end
     
     methods
@@ -111,15 +117,7 @@ classdef BotSim < handle
             inside = inpolygon(points(:,1),points(:,2),bot.inpolygonMapformatX,bot.inpolygonMapformatY);
         end
         
-        function point = getRndPtInMap(bot,minimumWallDist)
-            %generate random points inside the map bounds and test if they are inside
-            %This is probably a terrible way to do this, but it is by far the easiest
-            bounds = [max(bot.unmodifiedMap);  min(bot.unmodifiedMap)];
-            point =  bounds(1,:) + (bounds(2,:)-bounds(1,:)).*rand(1,2);
-            while(~pointInsideMap(bot,point)|| min(disToLineSeg(point,bot.mapLines))< minimumWallDist )
-                point =  bounds(1,:) + (bounds(2,:)-bounds(1,:)).*rand(1,2);
-            end
-        end
+        
         
         function scanConfig = generateScanConfig(bot,samples)
             %generates a simple 360 deg scan configuration.  You can set
@@ -187,8 +185,12 @@ classdef BotSim < handle
             line(bot.map(:,1),bot.map(:,2),'lineWidth',2,'Color','r'); % draws arena
         end
         
-        function drawBot(bot,lineLength)
-            plot(bot.pos(1),bot.pos(2),'o');
+        function drawBot(bot,lineLength, option)
+	    if(option == 1)
+	      plot(bot.pos(1),bot.pos(2), 'go', 'MarkerSize', 20);
+	    else
+	      plot(bot.pos(1),bot.pos(2), 'bo', 'MarkerSize', 10);
+	    end
             line([bot.pos(1) bot.pos(1)+bot.dir(1)*lineLength],[bot.pos(2) bot.pos(2)+bot.dir(2)*lineLength]);
         end
         
