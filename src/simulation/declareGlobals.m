@@ -2,7 +2,7 @@
 % configuration variables
 %---------------------------------------------------
 nscans = 360;
-nparticles = 200;
+nparticles = 50;
 
 
 %---------------------------------------------------
@@ -24,16 +24,16 @@ scanConfig = zeros(nscans, 2);		     	%stores how the robot performs a scan (num
 % Each bot is allocated the following variables.
 %---------------------------------------------------
 pos = zeros(nparticles, 2);    %position of the robot
-ang = zeros(nparticles);       %angle of the robot (radians)
+ang = zeros(nparticles, 1);       %angle of the robot (radians)
 dir = zeros(nparticles, 2);    %angle of the robot (stored as 2D unit vector)
 
-sensorNoise = 0;						     %Error standard deviation in cm
-motionNoise = 0;							     %cm error stdDev per unit length in cm/cm
-turningNoise = 0;    						     %Radian stdDev error per radian rad/rad
-weight = zeros(nparticles);
+sensorNoise = 0;					     %Error standard deviation in cm
+motionNoise = 0;					     %cm error stdDev per unit length in cm/cm
+turningNoise = 0;    					     %Radian stdDev error per radian rad/rad
+weight = zeros(nparticles, 1);
 scan_dist = zeros(nscans, nparticles);
 shift_dist = zeros(nscans, nparticles);
-%  cp;						% Crossing point
+cross_pts = zeros(nparticles, nscans, 2);	             % Crossing point
 
 %---------------------------------------------------
 % Robot variables
@@ -43,10 +43,12 @@ r_sensorNoise = 0;
 r_motionNoise = 0;
 r_turningNoise = 0;
 r_scan_dist = zeros(nscans, 1);
-r_shift_dist = zeros(nscans, 1);
+r_cross_pts = zeros(nscans, 2);
 
 %---------------------------------------------------
 % #defines
 %---------------------------------------------------
 DRAW_ROBOT = 1;
 DRAW_PARTICLE = 0;
+IN_MAP = 1;
+OUT_MAP = 0;

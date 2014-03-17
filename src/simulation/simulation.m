@@ -12,42 +12,32 @@ declareGlobals
 init
 
 
-  for i = 1:1
-    scan(robot, particle, nparticles);
-    
-    
-%      correctShift(robot, particle, nscans, nparticles);
-%      total_weight = assignWeights(robot, particle, nscans, nparticles);
-%      new_particle = quickSortP(particle, nparticles);
-%    
-%      running_sum = 0;
-%      c_sum = zeros(nparticles, 1);
-%      
-%      for j = 1:nparticles
-%        running_sum = running_sum + particle(j).weight;
-%        c_sum(j) = running_sum;
-%      end
-%      running_sum
-%      c_sum
-%  %      
-%      'After Roulette Selection'
-%  %      particle = rouletteSelection(particle, nparticles, nscans, map);
-%  %      total_weight = assignWeights(robot, particle, nscans, nparticles);
-%  
-%      figure();
-%      hold on;
-%      robot.drawMap();
-%  %      robot.drawBot(3);
-%      
-%      moveAll(robot, particle, nparticles);
-%      robot.drawBot(3, 1);
-%      
-%      for j = 1:nparticles
-%        particle(j).drawBot(3, 0);
-%      end
-%    
-%      hold off;
-  end
+for i = 1:10
+  scan;
+  correctShift;
+  
+  assignWeights;
+  quickSortP;
+
+  rouletteSelection;
+  assignWeights;
+
+  figure();
+  hold on;
+  drawMap;
+  
+  moveAll;
+  option = DRAW_ROBOT;
+  drawBot;
+
+  '===============Round================'
+%    option = DRAW_PARTICLE;
+%    for ind = 1:nparticles
+%      drawBot;
+%    end
+
+  hold off;
+end
 
   
 %    check = checkConvg(particle, nparticles);

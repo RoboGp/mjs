@@ -49,61 +49,7 @@ classdef BotSim < handle
             bot.turningNoise = noiseLevel(3); %porportional noise model. Radian stdDev error per radian rad/rad
         end
         
-        %% actions
-        function move(bot,distance)
-            %moves the bot forward by a distance in the direction its
-            %facing.  noise is added proportional to the distance moved. A
-            %constant amount of angular noise is added
-            bot.ang = bot.ang + randn(1)*bot.turningNoise;
-            bot.dir = [cos(bot.ang) sin(bot.ang)];
-            bot.pos = bot.pos + bot.dir*(distance+(distance*randn(1)*bot.motionNoise));
-            bot.updateScanLines(0,1);
-        end
         
-        function turn(bot,deltaAngle)
-            %turns the robot by an angle and adds noise proportional to the
-            %amount turned
-            bot.ang = bot.ang + deltaAngle+ deltaAngle*randn(1)*bot.turningNoise;
-            bot.dir = [cos(bot.ang) sin(bot.ang)];
-            bot.updateScanLines(0,1);
-        end
-        
-        function [distances crossingPoints] = ultraScan(bot)
-            %ultraScan simulates the ultrasound scan.  Returns a vector of
-            %distances to the walls with the respective crossing points
-            cps = zeros(length(bot.mapLines),2,length(bot.scanLines)); %crossingPoints
-            distances = zeros(size(bot.scanLines,1),1);
-            crossingPoints = zeros(size(bot.scanLines,1),2);
-            botpos = repmat(bot.pos,length(bot.mapLines),1); %preallocate for speed
-            for i =1:size(bot.scanLines)
-                cps(:,:,i) = intersection(bot.scanLines(i,:),bot.mapLines)+randn(length(bot.mapLines),2)*bot.sensorNoise;
-                distSQ =sum((cps(:,:,i) - botpos).^2,2);
-                [distances(i,:) indices] = min(distSQ);
-                distances(i,:) = sqrt(distances(i,:)); % only do sqrt once instead of on the entire vector
-                crossingPoints(i,:) = cps(indices,:,i);
-            end
-        end
-        
-        function randomPose(bot,minDistance)
-            %moves the robot to a random position and orientation a minimum
-            %distance away from the walls
-            bot.pos = bot.getRndPtInMap(minDistance);
-            bot.ang = 2*pi*rand(1);
-            bot.dir = [cos(bot.ang) sin(bot.ang)];
-            bot.updateScanLines(0,1);
-        end
-        
-        %%  general functions
-        function updateScanLines(bot,innerRad,outerRad)
-            %needs to be called after the robot has moved or turned.  This
-            %updates the scanLine vectors.  The inner and outer rad set how
-            %the scanlines are drawn and do not affect the operation of the
-            %program, Don't set them both to 0 however.
-            transMat = createTransMat(bot.pos)*createRotMat(bot.ang)*createTransMat(bot.scanOffset);
-            scanCenter = translate(bot.scanConfig*innerRad, transMat);
-            scans =  translate(bot.scanConfig*outerRad,transMat);
-            bot.scanLines = cat(2,scanCenter, scans);
-        end
         
         function inside = insideMap(bot)
             %Tests if the bot is currently inside the map.
@@ -111,87 +57,11 @@ classdef BotSim < handle
             inside = inpolygon(bot.pos(1),bot.pos(2),bot.inpolygonMapformatX,bot.inpolygonMapformatY);
         end
         
-        function inside = pointInsideMap(bot,points)
-            %Tests if a point is currently inside the map.
-            %Uses the inbuilt inpolygon function
-            inside = inpolygon(points(:,1),points(:,2),bot.inpolygonMapformatX,bot.inpolygonMapformatY);
-        end
         
         
-        
-        function scanConfig = generateScanConfig(bot,samples)
-            %generates a simple 360 deg scan configuration.  You can set
-            %the number of scans to take.
-            %this function could be static but is not for simplicity
-            %(no other functions are static and it may be confusing)            
-            startAngle =0;
-            endAngle = 2*pi;
-            i= startAngle:abs(startAngle-endAngle)/samples:startAngle+endAngle- abs(startAngle-endAngle)/samples;
-            scanConfig =  cat(1,cos(i), sin(i))'*30;
-        end
-        
-        %% getters and setters
-        function setBotPos(bot,value)
-            if(length(value) ==2)
-                bot.pos = value;
-                bot.updateScanLines(0,1);
-            else
-                error('Expected Vector Length 2')
-            end
-        end
-        
-        function botOut =getBotPos(bot)
-            botOut =bot.pos;
-        end
-        
-        function setBotAng(bot,value)
-            bot.ang = value;
-            bot.dir = [cos(bot.ang) sin(bot.ang)];
-            bot.updateScanLines(0,1);
-        end
-        
-        function botOut =getBotAng(bot)
-            botOut =bot.ang;
-        end
-        
-        function setScanConfig(bot,config,offsets)
-            if nargin <3
-               offsets = [0 0];
-            end
-            bot.scanConfig = config;
-            bot.scanOffset = offsets;
-            bot.updateScanLines(0,1);
-        end
-        
+      
         function mapOut =getMap(bot)
             mapOut = bot.unmodifiedMap;
-        end
-        
-        function setMap(bot,newMap)
-            bot.unmodifiedMap = newMap;
-            bot.inpolygonMapformatX = cat(1,newMap(:,1), newMap(1,1));
-            bot.inpolygonMapformatY = cat(1,newMap(:,2), newMap(1,2));
-            
-            newMap(length(newMap)+1,:)= newMap(1,:);
-            bot.map = newMap;
-            bot.mapLines = zeros(length(bot.map)-1,4);  %each row represents a border of the map
-            for i =1:size(bot.mapLines,1)
-                bot.mapLines(i,:) = [bot.map(i,:) bot.map(i+1,:)] ;
-            end
-        end
-        
-        %% drawing functions
-        function drawMap(bot)
-            line(bot.map(:,1),bot.map(:,2),'lineWidth',2,'Color','r'); % draws arena
-        end
-        
-        function drawBot(bot,lineLength, option)
-	    if(option == 1)
-	      plot(bot.pos(1),bot.pos(2), 'go', 'MarkerSize', 20);
-	    else
-	      plot(bot.pos(1),bot.pos(2), 'bo', 'MarkerSize', 10);
-	    end
-            line([bot.pos(1) bot.pos(1)+bot.dir(1)*lineLength],[bot.pos(2) bot.pos(2)+bot.dir(2)*lineLength]);
         end
         
         function drawScanConfig(bot)

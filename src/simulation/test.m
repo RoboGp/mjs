@@ -67,20 +67,42 @@
 %    
 %    
 %    
-  innerRad = 0;
-  outerRad = 1;
-  pos = [20 40];
-  
-  ang = pi;
-  scanOffset = [0 0];
-  scanConfig = generateScanConfig(20);
+%    innerRad = 0;
+%    outerRad = 1;
+%    pos = [20 40];
+%    
+%    ang = pi;
+%    scanOffset = [0 0];
+%    scanConfig = generateScanConfig(20);
+%  
+%    transMat = createTransMat(pos) * createRotMat(ang) * createTransMat(scanOffset);
+%      
+%    scanCenter = translate(scanConfig*innerRad, transMat);
+%    
+%    
+%    scans =  translate(scanConfig*outerRad, transMat);
+%    scans
+%    scanLines = cat(2, scanCenter, scans);
+%    scanLines
 
-  transMat = createTransMat(pos) * createRotMat(ang) * createTransMat(scanOffset);
-    
-  scanCenter = translate(scanConfig*innerRad, transMat);
-  
-  
-  scans =  translate(scanConfig*outerRad, transMat);
-  scans
-  scanLines = cat(2, scanCenter, scans);
-  scanLines
+
+movedist = 10;
+delta_angle = pi/2;
+
+botpos = zeros(1, 2);
+botang = r_ang;
+botpos(1, :) = r_pos(1, :);
+
+turn;
+move;
+
+figure()
+  hold on;
+  drawMap;
+
+r_pos(1, :) = botpos(1, :);
+r_ang = botang;
+r_dir(1, :) = botdir(1, :);
+
+  option = DRAW_ROBOT;
+  drawBot;

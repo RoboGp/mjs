@@ -8,23 +8,19 @@
 % Do a sqrt of that minimum distance to get the actual euclidean distance.
 % Save the closest crossing point.
 %---------------------------------------------------
-function [distances crossingPoints] = ultraScan(ind)
-    
-  scan_lines = updateScanLines(ind, 0, 1);
-  
-  cps = zeros(length(mapLines), 2, length(scan_lines)); 	%crossingPoints
-  distances = zeros(size(scan_lines,1), 1);
-  crossingPoints = zeros(size(scan_lines,1), 2);
-  
-  botpos = repmat(pos(ind), length(mapLines), 1); 		% (repeat matrix) preallocate for speed
-  
-  for i =1:size(scan_lines)
-    cps(:,:,i) = intersection(scan_lines(i,:), mapLines) + randn(length(mapLines),2) * sensorNoise;
-    distSQ = sum((cps(:,:,i) - botpos).^2, 2);
-    [distances(i,:) indices] = min(distSQ);
-    distances(i,:) = sqrt(distances(i,:)); 			% only do sqrt once instead of on the entire vector
-    crossingPoints(i,:) = cps(indices,:,i);
-  end
+updateScanLines;
 
+cps = zeros(length(map_lines), 2, length(scan_lines)); 	%crossingPoints
+distances = zeros(size(scan_lines,1), 1);
+crossingPoints = zeros(size(scan_lines,1), 2);
+
+botpos = repmat(botpos, length(map_lines), 1); 		% (repeat matrix) preallocate for speed
+
+for i =1:size(scan_lines)
+  cps(:,:,i) = intersection(scan_lines(i,:), map_lines) + randn(length(map_lines),2) * sensorNoise;
+  distSQ = sum((cps(:,:,i) - botpos).^2, 2);
+  [distances(i,:) indices] = min(distSQ);
+  distances(i,:) = sqrt(distances(i,:)); 			% only do sqrt once instead of on the entire vector
+  crossingPoints(i,:) = cps(indices,:,i);
 end
 
