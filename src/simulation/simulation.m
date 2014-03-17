@@ -37,8 +37,8 @@ for i = 1:10
   for ind = 1:nparticles
     pos(ind, 1) = pos(ind, 1) + (rand()/2 - rand()/2);
     pos(ind, 2) = pos(ind, 2) + (rand()/2 - rand()/2);
-    drawBot;
   end
+  drawBot;
 
   hold off;
 end

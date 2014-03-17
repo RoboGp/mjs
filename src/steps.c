@@ -85,6 +85,12 @@ for each particle
   check if movement is valid for particle
   move particle
 
+PADDING
+------
+map
+
+Pick first 3 points.
+Pick a point on both axis that's '5cm' from the intersection point.
 
 
 

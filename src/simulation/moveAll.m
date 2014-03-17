@@ -14,12 +14,14 @@
 %
 
 
-movedist = 10;
+movedist = rand() * 10 + 5;
 delta_angle = 0;
 
 botpos = zeros(1, 2);
 botang = r_ang;
 botpos(1, :) = r_pos(1, :);
+
+option = DRAW_ROBOT;
 
 robotRepos;				% We get the new delta_angle from here.
   
@@ -27,6 +29,7 @@ robotRepos;				% We get the new delta_angle from here.
 [r_pos r_ang r_dir] = move(r_pos, r_ang, r_dir, movedist, r_motionNoise, r_turningNoise);
 
 
+option = DRAW_PARTICLE;
 for ind = 1:nparticles
   botang = ang(ind);
   botpos(1, :) = pos(ind, :);

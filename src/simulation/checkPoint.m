@@ -12,7 +12,8 @@ newpos = botpos + (newdir * movedist);
 inside = inpolygon(newpos(1), newpos(2), inpolygonMapformatX, inpolygonMapformatY);
 %  plot(newpos(1), newpos(2), 'r.','MarkerSize',20);
 
-if (inside == IN_MAP)
+
+if (inside == IN_MAP && option == DRAW_ROBOT)
   botpos_mat = repmat(botpos, length(map_lines), 1); %preallocate for speed
   line_seg = [botpos newpos];
   cps = intersection(line_seg, map_lines);

@@ -6,7 +6,7 @@ setMap;
 drawMap;
 
 % Initialise Robot
-r_pos = [20 40];
+r_pos = [100 80];
 r_ang = degtorad(90);
 r_dir = [cos(r_ang) sin(r_ang)];
 
@@ -25,9 +25,7 @@ turningNoise = 0; %porportional noise model. Radian stdDev error per radian rad/
 option = DRAW_PARTICLE;
 min_wall_dist = 5;
 
-for ind = 1:nparticles
-  randomPose;
-  weight(ind) = 0;
-  drawBot;
-end
+newRandomPose;
+%  weight = 0;
+drawBot;
 
