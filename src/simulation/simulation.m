@@ -14,12 +14,14 @@ init
 
 for i = 1:10
   scan;
+  
   correctShift;
   
   assignWeights;
   quickSortP;
 
   rouletteSelection;
+  
   assignWeights;
 
   figure();
@@ -27,14 +29,16 @@ for i = 1:10
   drawMap;
   
   moveAll;
+  
   option = DRAW_ROBOT;
   drawBot;
 
-  '===============Round================'
-%    option = DRAW_PARTICLE;
-%    for ind = 1:nparticles
-%      drawBot;
-%    end
+  option = DRAW_PARTICLE;
+  for ind = 1:nparticles
+    pos(ind, 1) = pos(ind, 1) + (rand()/2 - rand()/2);
+    pos(ind, 2) = pos(ind, 2) + (rand()/2 - rand()/2);
+    drawBot;
+  end
 
   hold off;
 end

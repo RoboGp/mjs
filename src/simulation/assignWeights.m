@@ -16,3 +16,4 @@ end
 
 total_weight = sum(weight);
 weight = weight / total_weight;
+

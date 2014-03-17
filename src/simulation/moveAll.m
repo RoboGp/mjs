@@ -14,7 +14,7 @@
 %
 
 
-movedist = 60;
+movedist = 10;
 delta_angle = 0;
 
 botpos = zeros(1, 2);
@@ -36,10 +36,9 @@ for ind = 1:nparticles
    
     [ang(ind) dir(ind, :)] = turn(ang(ind), delta_angle, dir(ind, :), turningNoise);
     [pos(ind, :) ang(ind) dir(ind, :)] = move(pos(ind, :), ang(ind), dir(ind, :), movedist, motionNoise, turningNoise);
-    [pos(ind, :) ind]
     
-    option = DRAW_PARTICLE;
-    drawBot;
+%      option = DRAW_PARTICLE;
+%      drawBot;
 
   end
 end
