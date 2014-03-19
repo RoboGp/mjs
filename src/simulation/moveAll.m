@@ -36,7 +36,10 @@ for ind = 1:nparticles
     [ang(ind) dir(ind, :)] = turn(ang(ind), delta_angle, dir(ind, :), turningNoise);
     [pos(ind, :) ang(ind) dir(ind, :)] = move(pos(ind, :), ang(ind), dir(ind, :), movedist, motionNoise, turningNoise);
     
-  end
+  else
+    
+    slide();
+    
 end
 
 

@@ -102,6 +102,55 @@ list = angle, dis
 
 4
 
+SLIDE ALGORITHM
+---------------
+%  find distance
+%  while(1) {
+%    % we know the old point, new point, dist and angle
+%    old point
+%    new point
+%  
+%    find intersection point of old->new with a map line == cp.
+%    the particular mapline points == map1 map2
+%  
+%    find distance between cp and new == dist
+%    find which direction cp-new is tending towards == map_tend
+%  
+%    find distance between cp and map_tend == dist_tend
+%  
+%    dist = dist - dist_tend
+%  
+%    if(dist > 0) {
+%      same angle
+%      old_point = map_tend
+%      dist
+%      calculate new_point
+%    }
+%  }
+
+
+%  dist
+%  cross_pt corner
+%  
+%  move_pt = cross_pt + dist
+%  
+%  if(move_pt is inside and beyond the corner) {
+%      find the distance between the move pt and corner
+%      old pt = corner
+%      new pt = calculate based on the map with the angle and all.
+%      
+%      if(new point is inside the map) {
+%        set it to the particle's new position.
+%        break
+%      }
+%  }
+%  else if(move_pt is inside and before or on the corner)
+%    break
+%  
+%  else if move_pt is outside the map
+%      set it to the corner.
+%  end
+  
 
 
 
