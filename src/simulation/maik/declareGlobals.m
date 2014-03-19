@@ -1,7 +1,7 @@
 %---------------------------------------------------
 % configuration variables
 %---------------------------------------------------
-nscans = 8;
+nscans = 10;
 nparticles = 70;
 
 
@@ -20,9 +20,11 @@ scanOffset = zeros(1, 2);		     	%stores the offset of center of rotation of the
 scanConfig = zeros(nscans, 2);		     	%stores how the robot performs a scan (number of points, angle between points)
 
 setMap;
+drawMap;
+
 pad;
 genParticlePos;
-drawMap;
+
 %---------------------------------------------------
 % Each bot is allocated the following variables.
 %---------------------------------------------------

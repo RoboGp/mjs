@@ -16,6 +16,7 @@ ub = ((infVec1(:,3)-infVec1(:,1)).*(infVec1(:,2)-line2(:,2))-(infVec1(:,4)-infVe
 % filter = ub >= 0 & ub <= 1 & ua >= 0 & ua <= 1
 filter = ub >= 0 & ub <= 1 & ua>=0; %
 crossingPoint =[infVec1(:,1)+ua.*(infVec1(:,3)-infVec1(:,1)) infVec1(:,2)+ua.*(infVec1(:,4)-infVec1(:,2))];
+
 for i = 1:length(filter)
     if filter(i) == 0
         crossingPoint(i,:) = NaN(1,2);

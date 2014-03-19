@@ -4,12 +4,15 @@
 % Return values
 % inside
 %
+% Checks if the new position is within the padded map.
+% If yes, checks if there is any wall (of the original map) between the robot and the new position.
+%
 
 newang = delta_angle + botang;
 newdir = [cos(newang) sin(newang)];
 newpos = botpos + (newdir * movedist);
 
-inside = inpolygon(newpos(1), newpos(2), inpolygonMapformatX, inpolygonMapformatY);
+inside = inpolygon(newpos(1), newpos(2), pad_inpolygonMapformatX, pad_inpolygonMapformatY);
 %  plot(newpos(1), newpos(2), 'r.','MarkerSize',20);
 
 

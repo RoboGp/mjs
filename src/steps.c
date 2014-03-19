@@ -94,8 +94,13 @@ Pick a point on both axis that's '5cm' from the intersection point.
 
 
 
-  
+starting angle == random
+Pick a distance.
+Move that distance in one of 8 directions.
 
+list = angle, dis
+
+4
 
 
 

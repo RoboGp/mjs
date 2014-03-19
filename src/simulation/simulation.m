@@ -11,7 +11,17 @@ axis equal;
 declareGlobals
 init
 
-
+%  for z = 1:10
+%    figure();
+%    hold on;
+%    drawMap;
+%    
+%    moveAll;
+%    option = DRAW_ROBOT;
+%    drawBot;
+%  
+%    hold off;
+%  end
 for i = 1:10
   scan;
   
@@ -43,17 +53,17 @@ for i = 1:10
   hold off;
 end
 
-  
+%    
 %    check = checkConvg(particle, nparticles);
 %  end
 %  
 %  %---------------------------------------------------
 %  % PART II
 %  %---------------------------------------------------
-%  nrows = size(map);
+%  nrows = length(map);
 %  visgraph = zeros(nrows(1)+1, nrows(1)+1);
 %  
-%  for c = 1:nrows(1)
+%  for c = 1:nrows
 %    ilist = findConnections(robot, c);
 %    check = checkValid(robot, robot.map(c,:), ilist);
 %    

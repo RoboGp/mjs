@@ -1,22 +1,13 @@
 %---------------------------------------------------
-% FIND THE BEST SHIFTED HISTOGRAM
+% Check if the line: robot <-> corner intersects any map wall.
+% If it does, record the map wall point.
 %---------------------------------------------------
-function ilist = findConnections(robot, c)
-  
-  i = 1;
-  for w = 1 : nrows(1)
-    
-    if(w == nrows(1)
-      cp = intersection(robot.pos, robot.map(c,:), robot.map(w,:), robot.map(1,:));
-    else
-      cp = intersection(robot.pos, robot.map(c,:), robot.map(w,:), robot.map(w+1,:));
-    end
+botpos_mat = repmat(r_pos, length(map_lines), 1); %preallocate for speed
+line_seg = [r_pos map(c, :)];
+cps = intersection(line_seg, map_lines);
+distSQ = sum((cps(:,:) - botpos_mat).^2,2);
+[distances(1,:) index] = min(distSQ);
 
-    if(cp(1) ~= NAN && cp(2) ~= NAN)
-      ilist(i) =  robot.map(w,:);
-      ilist(i,3) = distance(robot.pos, robot.map(w,:));
-    end
-    
-  end
-  
+if(the closest point (index) is also the corner we're looking for)  
+ add the corner to our list
 end
