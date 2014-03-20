@@ -3,7 +3,7 @@
 %distance away from the walls
 %---------------------------------------------------
 
-padlen = 10;
+padlen = 50;
 
 % Finds the left, lowermost corner and right, topmost corner of the padded map
 min_x = min(new_map(:, 1));

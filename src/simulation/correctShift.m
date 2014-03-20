@@ -22,8 +22,9 @@ for ind = 1:nparticles
       
   angle = (angle - 1) * (360/nscans);
   angle = degtorad(angle);
-  ang(ind) = ang(ind) - angle;
   
+  ang(ind) = ang(ind) - angle;
+  ang(ind) = mod(ang(ind), 2*pi);
   dir(ind, :) = [cos(ang(ind)) sin(ang(ind))];
 
 end

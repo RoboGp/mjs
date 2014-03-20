@@ -3,10 +3,10 @@
 %  new = spos_new_old;
 
 %  old = [90, 90];
-old = [5, 5];
+old = [55, 20];
 %  new = [40, 70];
-sang = degtorad(85);
-sdist = 60;
+sang = degtorad(45);
+sdist = 100;
 
 sang = mod(sang, 2*pi);
 
@@ -39,22 +39,35 @@ while(sdist)
   % Find the intersection point and the particular map line being intersected.
   cps = intersection(lineseg, pad_map_lines);
   distSQ = sum((cps - botpos_mat).^2, 2);
-  distSQ(distSQ == 0) = NaN;
-  distSQ
-  [distances(i,:) index] = min(distSQ);
+
+  [sort_distSQ sort_index] = sort(distSQ);
+  [distances(i,:) index] = min(sort_distSQ);
+  index = sort_index(1);
   cross_pt = cps(index, :);
 
   % Store the distance between cp and the new point that is outside the map.
   
   % Find the map point the lineseg is tending towards.
   % Find if the map line is along the x or y direction.
-  option = 1;
-  if(length(index) > 1)
+  if(sort_distSQ(1) == 0 && ~isnan(sort_distSQ(2)))	% If intersecting more than one line and I'm on the nearest intersected line
+    check_dist = 1;
+    check_pos = cross_pt + (sdir * check_dist);
+    
     option = 2;
+    if(sort_distSQ(2) == 0)
+      option = 3;
+    end
+    
+    if(inpolygon(check_pos(1), check_pos(2), pad_inpolygonMapformatX, pad_inpolygonMapformatY))
+      pt_a = pad_map_lines(sort_index(option), 3:4);
+      pt_b = pad_map_lines(sort_index(option), 1:2);
+      cross_pt = cps(sort_index(option), :);
+    end
+  else
+    pt_a = pad_map_lines(index, 3:4);
+    pt_b = pad_map_lines(index, 1:2);
   end
-  pt_a = pad_map_lines(index(option), 3:4);
-  pt_b = pad_map_lines(index(option), 1:2);
-  
+
   if(pt_a(2) == pt_b(2))
     sdist = abs(cross_pt(1) - new(1));
     if(pt_a(1) < pt_b(1))
@@ -91,10 +104,9 @@ while(sdist)
   % Particular map point = tend_pt
   % Find if the extra distance to be moved can be covered on the intersecting map line.
   %---
-  dist_tend = cartDist(cross_pt(1), cross_pt(2), tend_pt(1), tend_pt(2));
-  
   cross_pt = abs(cross_pt);
 
+  cross_pt = (round(cross_pt .* 1000))/1000;
   if(cross_pt(2) == tend_pt(2))			% Moving along y axis
     if(tend_dir > 0)				% Moving to the right
       cross_pt(1) = cross_pt(1) + sdist;
@@ -110,7 +122,7 @@ while(sdist)
   end
   
   cross_pt = (round(cross_pt .* 1000))/1000;
-  
+    
  plot(cross_pt(1), cross_pt(2), 'g.','MarkerSize',5);
 %   
 %   %---
@@ -160,7 +172,7 @@ while(sdist)
   sdist = cartDist(cross_pt(1), cross_pt(2), tend_pt(1), tend_pt(2));
   old = tend_pt;
 
-  sdir = [cos(sang) sin(sang)];
+%    sdir = [cos(sang) sin(sang)];
   new = tend_pt + sdir * (sdist + (sdist * randn(1) * motionNoise));
   
   inside = inpolygon(new(1), new(2), pad_inpolygonMapformatX, pad_inpolygonMapformatY);
@@ -174,3 +186,6 @@ while(sdist)
 end
 
 plot(move_pt(1), move_pt(2), 'y.','MarkerSize',20);
+
+
+

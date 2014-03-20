@@ -16,7 +16,7 @@ inside = inpolygon(newpos(1), newpos(2), pad_inpolygonMapformatX, pad_inpolygonM
 %  plot(newpos(1), newpos(2), 'r.','MarkerSize',20);
 
 
-if (inside == IN_MAP && option == DRAW_ROBOT)
+if (inside == IN_MAP)
   botpos_mat = repmat(botpos, length(map_lines), 1); %preallocate for speed
   line_seg = [botpos newpos];
   cps = intersection(line_seg, map_lines);
