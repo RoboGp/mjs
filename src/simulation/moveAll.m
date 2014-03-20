@@ -19,13 +19,13 @@
 %  
 %  option = DRAW_ROBOT;
 
-nmotions = 4;
+nmotions = 1;
 
 mlist = zeros(nmotions, 2);
 
-for i = 1:nmotions
+for y = 1:nmotions
   robotRepos;				% We get the new delta_angle from here.
-  mlist(i, :) = [delta_angle movedist];
+  mlist(y, :) = [delta_angle movedist];
   [r_ang r_dir] = turn(r_ang, delta_angle, r_dir, r_turningNoise);
   [r_pos r_ang r_dir] = move(r_pos, r_ang, r_dir, movedist, r_motionNoise, r_turningNoise);
 end
@@ -39,12 +39,19 @@ for ind = 1:nparticles
     movdist = mlist(y, 2);
     checkPoint;				% Checks if delta_angle and movedist will get a point inside the map.
     
+    [ang(ind) dir(ind, :)] = turn(ang(ind), delta_angle, dir(ind, :), turningNoise);
+
     if (inside == IN_MAP)
-    
-      [ang(ind) dir(ind, :)] = turn(ang(ind), delta_angle, dir(ind, :), turningNoise);
       [pos(ind, :) ang(ind) dir(ind, :)] = move(pos(ind, :), ang(ind), dir(ind, :), movedist, motionNoise, turningNoise);
-    
-    % Put the else, slide part here.
+    else
+      sang = ang(ind);
+      spos = pos(ind, :);
+      [spos_new sang sdir] = move(pos(ind, :), ang(ind), dir(ind, :), movedist, motionNoise, turningNoise);
+      sdist = movedist;
+
+      slide;
+      
+      pos(ind, :) = move_pt;
     end
    end
 end

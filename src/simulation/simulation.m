@@ -22,9 +22,9 @@ init
 %  
 %    hold off;
 %  end
-for i = 1:10
+for iterations = 1:10
   scan;
-  
+    
   correctShift;
   
   assignWeights;
@@ -42,11 +42,17 @@ for i = 1:10
   
   option = DRAW_ROBOT;
   drawBot;
-
+  
   option = DRAW_PARTICLE;
+  part_pos = zeros(1, 2);
   for ind = 1:nparticles
-    pos(ind, 1) = pos(ind, 1) + (rand()/2 - rand()/2);
-    pos(ind, 2) = pos(ind, 2) + (rand()/2 - rand()/2);
+    part_pos(1) = pos(ind, 1) + (rand()/2 - rand()/2);
+    part_pos(2) = pos(ind, 2) + (rand()/2 - rand()/2);
+    
+    inside = inpolygon(part_pos(1), part_pos(2), pad_inpolygonMapformatX, pad_inpolygonMapformatY);
+    if(inside)
+      pos(ind, :) = part_pos(1, :);
+    end
   end
   drawBot;
 
