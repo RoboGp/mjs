@@ -27,21 +27,15 @@ for y = 1:nmotions
   robotRepos;				% We get the new delta_angle from here.
   mlist(y, :) = [delta_angle movedist];
   
-  old_sang = r_ang;
   [r_ang r_dir] = turn(r_ang, delta_angle, r_dir, r_turningNoise);
   
-  sang = r_ang;
-  spos = r_pos;
   [spos_new sang sdir] = move(r_pos, r_ang, r_dir, movedist, motionNoise, turningNoise);
 
+  spos = r_pos;
   % delta_angle, botang, botpos, movedist
-  botang = old_sang;
-  botpos = spos_new;
-
-  inside = checkPoint(delta_angle, sang, spos, movedist, pad_map_lines, pad_inpolygonMapformatX, pad_inpolygonMapformatY);
+  inside = checkPoint(delta_angle, sang, spos_new, movedist, pad_map_lines, pad_inpolygonMapformatX, pad_inpolygonMapformatY);
 
   sdist = movedist;
-  sdist
   % sang, spos, spos_new, sdir, sdist
   if(~inside)
     slide;
@@ -51,33 +45,31 @@ for y = 1:nmotions
   end
 end
 
-%  option = DRAW_PARTICLE;
-%  for ind = 1:nparticles
-%    for y = 1:nmotions
-%      botang = ang(ind);
-%      botpos(1, :) = pos(ind, :);
-%      delta_angle = mlist(y, 1);
-%      movdist = mlist(y, 2);
-%      checkPoint;				% Checks if delta_angle and movedist will get a point inside the map.
-%      
-%      [ang(ind) dir(ind, :)] = turn(ang(ind), delta_angle, dir(ind, :), turningNoise);
-%  
-%  %      ang
-%      if (inside == IN_MAP)
-%        [pos(ind, :) ang(ind) dir(ind, :)] = move(pos(ind, :), ang(ind), dir(ind, :), movedist, motionNoise, turningNoise);
-%  %      else
-%  %        sang = ang(ind);
-%  %        spos = pos(ind, :);
-%  %        [spos_new sang sdir] = move(pos(ind, :), ang(ind), dir(ind, :), movedist, motionNoise, turningNoise);
-%  %        sdist = movedist;
-%  %  
-%  %        % sang, spos, spos_new, sdir, sdist
-%  %        slide;
-%  %        
-%  %        pos(ind, :) = move_pt;
-%      end
-%     end
-%  end
-%  
-%  
-%  
+option = DRAW_PARTICLE;
+for ind = 1:nparticles
+  for y = 1:nmotions
+    botang = ang(ind);
+    botpos(1, :) = pos(ind, :);
+    delta_angle = mlist(y, 1);
+    movdist = mlist(y, 2);
+    inside = checkPoint(delta_angle, botang, botpos, movdist, pad_map_lines, pad_inpolygonMapformatX, pad_inpolygonMapformatY);			    
+    [ang(ind) dir(ind, :)] = turn(ang(ind), delta_angle, dir(ind, :), turningNoise);
+
+    if (inside == IN_MAP)
+      [pos(ind, :) ang(ind) dir(ind, :)] = move(pos(ind, :), ang(ind), dir(ind, :), movedist, motionNoise, turningNoise);
+    else
+      sang = ang(ind);
+      spos = pos(ind, :);
+      [spos_new sang sdir] = move(pos(ind, :), ang(ind), dir(ind, :), movedist, motionNoise, turningNoise);
+      sdist = movedist;
+
+      % sang, spos, spos_new, sdir, sdist
+      slide;
+      
+      pos(ind, :) = move_pt;
+    end
+   end
+end
+
+
+

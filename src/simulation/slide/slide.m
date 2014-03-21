@@ -6,19 +6,19 @@ sdir = [cos(sang) sin(sang)];
 count = 0;
 while(sdist) 
 
-  count
+%    count
   count = count + 1;
   prev_spos = spos;
   
   [spos_new sang sdir] = move(spos, sang, sdir, sdist, 0, 0);
   lines = [[spos(1) spos(2)];  [spos_new(1) spos_new(2)]];
-  line(lines(:,1), lines(:,2), 'lineWidth', 2, 'Color', 'b');
+%    line(lines(:,1), lines(:,2), 'lineWidth', 2, 'Color', 'b');
 
   checkIn;
   selMapline;				% gets pt_left, pt_right, cross_pt
   
   if(spos ~= prev_spos)
-    'LOOOP'
+%      'LOOOP'
     continue
   else
     
@@ -27,9 +27,9 @@ while(sdist)
   findTend;				% finds tend_pt, tend_dir
   findProj;				% finds proj_pt
 
-  plot(proj_pt(1), proj_pt(2), 'g.','MarkerSize',5);
+%    plot(proj_pt(1), proj_pt(2), 'g.','MarkerSize',5);
   
-  disp([' ' num2str(count) ' ' num2str(pt_left) ' ' num2str(pt_right) '  == ' num2str(sign(tend_dir))])
+%    disp([' ' num2str(count) ' ' num2str(pt_left) ' ' num2str(pt_right) '  == ' num2str(sign(tend_dir))])
 %    pt_left
 %      pt_right
 %      tend_dir
@@ -53,4 +53,4 @@ if(isnan(tend_dir))
   move_pt = tend_pt;
 end
 
-plot(move_pt(1), move_pt(2), 'y.','MarkerSize',20);
+%  plot(move_pt(1), move_pt(2), 'y.','MarkerSize',20);
