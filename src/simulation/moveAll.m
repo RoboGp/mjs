@@ -38,7 +38,8 @@ for y = 1:nmotions
   botang = old_sang;
   botpos = spos_new;
 
-  checkPoint;
+  inside = checkPoint(delta_angle, sang, spos, movedist, pad_map_lines, pad_inpolygonMapformatX, pad_inpolygonMapformatY);
+
   sdist = movedist;
   sdist
   % sang, spos, spos_new, sdir, sdist

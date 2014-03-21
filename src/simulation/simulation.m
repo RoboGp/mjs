@@ -11,7 +11,7 @@ axis equal;
 declareGlobals
 init
 
-for niterations = 1:2
+for niterations = 1:100
   figure();
   hold on;
   drawMap;
@@ -26,7 +26,7 @@ for niterations = 1:2
     break;
   end
   
-  pause(1);
+%    pause(1);
   hold off;
 end
 %  for iterations = 1:50
