@@ -27,3 +27,5 @@ if (inside == IN_MAP)
     inside = OUT_MAP;
   end
 end
+
+
