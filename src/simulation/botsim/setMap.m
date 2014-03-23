@@ -9,6 +9,6 @@ map(length(map)+1,:)= map(1,:);
 % map_lines has 4 columns and is the length of the old_map.
 % First row -> 1st point, 2nd point
 % Second row -> 2nd point, 3rd point...and so on.
-for i =1:size(map_lines,1)
+for i = 1:length(map_lines)
   map_lines(i,:) = [map(i,:) map(i+1,:)] ;
 end

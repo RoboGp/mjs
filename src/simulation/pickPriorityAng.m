@@ -1,3 +1,6 @@
+%----------------
+% We're giving priority to the forward facing angles.
+%----------------
 if (r_scan_dist(1) > delta_dist)
   del_ind = 1;
 elseif(r_scan_dist(2) > delta_dist && r_scan_dist(8) > delta_dist)
@@ -30,6 +33,6 @@ elseif(r_scan_dist(4) > delta_dist)
   del_ind = 4;
 elseif(r_scan_dist(6) > delta_dist)
   del_ind = 6;
-elseif(r_scan_dist(5) > delta_dist)
+elseif(r_scan_dist(5) > delta_dist)			% 270 deg w.r.t current angle
   del_ind = 5;
 end

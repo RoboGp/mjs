@@ -38,7 +38,7 @@ disp('fortunately it is possible to take multiple scans at once.')
 disp('botSim.setScanConfig(botSim.generateScanConfig(20)) sets the robot to');
 input('scan 20 times all around the robot');
 
-botSim.setScanConfig(botSim.generateScanConfig(20));  %sets the scan configuration on the
+botSim.setScanConfig(botSim.generateScanConfig(18));  %sets the scan configuration on the
 %botSim.  The other argument will be explained later.
 
 clf; axis equal; hold on; botSim.drawMap();  %resets drawing area
@@ -74,10 +74,6 @@ botSim.drawBot(3);
 [distance crossingPoint]  = botSim.ultraScan()
 scatter(crossingPoint(:,1),crossingPoint(:,2),'marker','o','lineWidth',3);
 
-
-%------------------------------------------------------------------------------------------
-%------------------------------------------------------------------------------------------
-%------------------------------------------------------------------------------------------
 disp(' ');
 disp('Optional Extra');
 disp('Advanced scanConfig setup (not required in most cases)');

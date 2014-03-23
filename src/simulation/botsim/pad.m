@@ -1,9 +1,15 @@
+%----
+% We look for a point that is pad_len distance from each corner of the map.
+% The order in which we check is important - refer to the newPts variable.
+%----
 new_map = map;
+pad_len = 5;
+
 for i = 1:length(map)
-  newPts = [map(i, 1) - 5,map(i, 2) - 5;
-	    map(i, 1) - 5,map(i, 2) + 5;
-	    map(i, 1) + 5,map(i, 2) + 5;
-	    map(i, 1) + 5,map(i, 2) - 5];
+  newPts = [map(i, 1) - pad_len, map(i, 2) - pad_len;
+	    map(i, 1) - pad_len, map(i, 2) + pad_len;
+	    map(i, 1) + pad_len, map(i, 2) + pad_len;
+	    map(i, 1) + pad_len, map(i, 2) - pad_len];
   
   out = inpolygon(newPts(:, 1), newPts(:, 2), inpolygonMapformatX, inpolygonMapformatY);
   index =  find(out);
@@ -31,4 +37,3 @@ end
 pad_inpolygonMapformatX = cat(1, new_map(:,1), new_map(1,1));
 pad_inpolygonMapformatY = cat(1,new_map(:,2), new_map(1,2));
 
-%  line(new_map(:,1), new_map(:,2), 'lineWidth', 2, 'Color', 'g');

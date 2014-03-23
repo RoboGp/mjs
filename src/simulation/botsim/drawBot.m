@@ -5,7 +5,10 @@ if(option == DRAW_ROBOT)
 else
 %    scatter(pos(:, 1), pos(:, 2), 5, 50, 'LineWidth', 2);
   scatter(pos(:, 1), pos(:, 2));
-%    line([pos(:,1) pos(:, 1)+ dir(:, 1)*lineLength], [pos(:,2) pos(:,2)+dir(:,2)*lineLength]);
+  
+  for jack = 1:nparticles
+    line([pos(jack,1) pos(jack, 1)+ dir(jack, 1)*lineLength], [pos(jack,2) pos(jack,2)+dir(jack,2)*lineLength]);
+  end
 end
 
   

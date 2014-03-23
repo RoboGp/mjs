@@ -8,8 +8,8 @@ nparticles = 70;
 %---------------------------------------------------
 % MAP variables
 %---------------------------------------------------
-map =[0,0;60,0;60,45;45,45;45,59;106,59;106,105;0,105];
-%  map =[0,0;60,0;60,45;45,45;45,59;106,59;106,105;0,105; 0,60; 20,60; 20,40; 0,40];
+%  map =[0,0;60,0;60,45;45,45;45,59;106,59;106,105;0,105];
+map =[0,0;60,0;60,45;45,45;45,59;106,59;106,105;0,105; 0,60; 20,60; 20,40; 0,40];
 
 %The map stored as a list of lines (for easy line interection)
 map_lines = zeros(length(map), 4);  		%each row represents a border of the map
@@ -23,7 +23,6 @@ scanConfig = zeros(nscans, 2);		     	%stores how the robot performs a scan (num
 setMap;
 pad;
 
-%  new_map(length(new_map)+1,:)= new_map(1,:);
 pad_map_lines = zeros(length(new_map)-1, 4);  		%each row represents a border of the map
 for i =1:length(pad_map_lines)
   pad_map_lines(i,:) = [new_map(i,:) new_map(i+1,:)] ;
@@ -54,7 +53,6 @@ r_sensorNoise = 0;
 r_motionNoise = 0;
 r_turningNoise = 0;
 r_scan_dist = zeros(nscans, 1);
-r_cross_pts = zeros(nscans, 2);
 
 %---------------------------------------------------
 % #defines

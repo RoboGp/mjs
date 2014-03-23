@@ -12,3 +12,51 @@ multiple movements == mayyy be
 Those particles that can't replicate the robot's motion -> are we happy with leaving them at the same spot?
 
 Code formula for angled padding.
+
+CHecks done
+---------
+assignWeights
+checkBeyond
+checkIn
+checkOnline
+checkPoint
+correctShift
+drawAll
+drawMap
+findProj
+findTend
+genParticlePos
+generateScanConfig
+init
+localScan
+moveAll
+moveFromCorner
+pad
+particleSelection
+pickPriorityAng
+robotRepos
+scan
+selMapline
+setMap
+setMove
+slide
+sortParticles
+turn
+ultraScan
+updateScanLines
+
+
+Todo
+-----
+Does each particle need the cross_pts array?
+
+Move all should just contain slide - slide handles everything!
+Create slide in such a way that it can be deactivated.
+
+selMapline repeats what checkPoint has already calculated.
+
+Look for other distribution functions other than gaussmf - assignWeights
+
+If I store all the crossing points, will it help for the sliding?
+
+A better method of selection?

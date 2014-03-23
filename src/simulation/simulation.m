@@ -1,4 +1,3 @@
-clf;
 clc;
 clear all;
 
@@ -29,42 +28,25 @@ init
 %  %    pause(1);
 %    hold off;
 %  end
-for iterations = 1:50
+for iterations = 1:100
   scan;
-    
   correctShift;
-  
-  assignWeights;
-  quickSortP;
 
-  rouletteSelection;
+  assignWeights;
+  sortParticles;
+  
+  particleSelection;
   assignWeights;
 
-  figure();
-  hold on;
-  drawMap;
-  
-  moveAll;
-  
-  option = DRAW_ROBOT;
-  drawBot;
-  
-  option = DRAW_PARTICLE;
-  part_pos = zeros(1, 2);
-  for ind = 1:nparticles
-    part_pos(1) = pos(ind, 1) + (rand()/2 - rand()/2);
-    part_pos(2) = pos(ind, 2) + (rand()/2 - rand()/2);
-    
-    inside = inpolygon(part_pos(1), part_pos(2), pad_inpolygonMapformatX, pad_inpolygonMapformatY);
-    if(inside)
-      pos(ind, :) = part_pos(1, :);
-    end
+  for nmovs = 1:1
+    moveAll;
   end
-  drawBot;
 
-  hold off;
-%    close all;
-  ['iteration over']
+  if(mod(iterations, 20) == 0)
+    close all;
+  end
+  
+  drawAll;
 end
 
 %    

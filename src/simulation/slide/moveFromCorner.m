@@ -1,4 +1,4 @@
-% I have -> botpos, newpos
+% Move the bot 1cm away from the corner, such that the new position is still on the map.
 
 function botpos = move(botpos, pad_inpolygonMapformatX, pad_inpolygonMapformatY)
 

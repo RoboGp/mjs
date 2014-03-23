@@ -7,7 +7,6 @@ botpos = r_pos(1, :);
 botang = r_ang;
 ultraScan;
 r_scan_dist = distances;
-r_cross_pts = crossingPoints;
 
 for ind = 1:nparticles
   botpos = pos(ind, :);

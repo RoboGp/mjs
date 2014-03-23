@@ -6,7 +6,7 @@
 % the distSQ step: magically finds the euclidean distances in one step: (xcps -xbotpos)^2 + (ycps - ybotpos)^2
 % find the minimum distance, i.e. the closest point.
 % Do a sqrt of that minimum distance to get the actual euclidean distance.
-% Save the closest crossing point.
+% Save the closest crossing point along a particular scan line.
 %---------------------------------------------------
 updateScanLines;
 
@@ -16,7 +16,7 @@ crossingPoints = zeros(size(scan_lines,1), 2);
 
 botpos_mat = repmat(botpos, length(map_lines), 1); 		% (repeat matrix) preallocate for speed
 
-for i =1:size(scan_lines)
+for i =1:length(scan_lines)
   cps(:,:,i) = intersection(scan_lines(i,:), map_lines) + randn(length(map_lines),2) * sensorNoise;
   distSQ = sum((cps(:,:,i) - botpos_mat).^2, 2);
   [distances(i,:) indices] = min(distSQ);

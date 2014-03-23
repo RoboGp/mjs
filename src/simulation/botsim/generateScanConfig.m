@@ -1,8 +1,5 @@
 %---------------------------------------------------
-%generates a simple 360 deg scan configuration.  You can set
-%the number of scans to take.
-%this function could be static but is not for simplicity
-%(no other functions are static and it may be confusing)            
+% generates an '360/nscans' degree scan configuration.              
 %---------------------------------------------------
 
 startAngle = 0;

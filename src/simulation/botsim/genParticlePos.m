@@ -1,6 +1,6 @@
 %---------------------------------------------------
-%moves the robot to a random position and orientation a minimum
-%distance away from the walls
+% Generates the maximum number of particles that are padlen distance from each
+% other and within the padded map.
 %---------------------------------------------------
 
 padlen = 10;
