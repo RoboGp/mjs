@@ -1,26 +1,30 @@
-%---------------------------------------------------
-% ultraScan simulates the ultrasound scan.  Returns a vector of
-% distances to the walls with the respective crossing points
-%
-% find intersection point of the scan line and all the map lines in the path of that scan line.
-% the distSQ step: magically finds the euclidean distances in one step: (xcps -xbotpos)^2 + (ycps - ybotpos)^2
-% find the minimum distance, i.e. the closest point.
-% Do a sqrt of that minimum distance to get the actual euclidean distance.
-% Save the closest crossing point along a particular scan line.
-%---------------------------------------------------
 updateScanLines;
 
-cps = zeros(length(map_lines), 2, length(scan_lines)); 	%crossingPoints
-distances = zeros(size(scan_lines,1), 1);
-crossingPoints = zeros(size(scan_lines,1), 2);
+map_len = length(map_lines);
+rep_dim = map_len*nscans;
+rep_scan = zeros(nscans*length(map_lines), 4);
 
-botpos_mat = repmat(botpos, length(map_lines), 1); 		% (repeat matrix) preallocate for speed
-
-for i =1:length(scan_lines)
-  cps(:,:,i) = intersection(scan_lines(i,:), map_lines) + randn(length(map_lines),2) * sensorNoise;
-  distSQ = sum((cps(:,:,i) - botpos_mat).^2, 2);
-  [distances(i,:) indices] = min(distSQ);
-  distances(i,:) = sqrt(distances(i,:)); 			% only do sqrt once instead of on the entire vector
-  crossingPoints(i,:) = cps(indices,:,i);
+for i = 1:nscans
+    j = (i - 1)*map_len + 1;
+    rep_scan(j:(j + map_len - 1), :) = repmat(scan_lines(i, :), map_len, 1);
 end
+rep_map = repmat(map_lines, nscans, 1);
 
+rep_inter = intersection(rep_scan, rep_map);
+
+botpos_mat = repmat(botpos, rep_dim, 1);
+diff = bsxfun(@minus, rep_inter, botpos_mat);
+distNN = bsxfun(@hypot, diff(:, 1), diff(:, 2));
+%distNN = bsxfun(@times, diff(:, 1), diff(:, 1)) + bsxfun(@times, diff(:, 2), diff(:, 2));
+crossingPoints = zeros(nscans, 2);
+distances = zeros(nscans, 1);
+
+%  length(distances)
+
+for i = 1:nscans
+    j = (i - 1)*map_len + 1;
+    temp_distance = distNN(j:(j + map_len - 1), :);
+    [distances(i,:), indices] = min(temp_distance);
+    temp_cps = rep_inter(j:(j + map_len - 1), :);
+    crossingPoints(i,:) = temp_cps(indices,:);
+end

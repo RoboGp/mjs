@@ -23,17 +23,17 @@ alt_turn_angle = 0.3491;	% 20 deg
 min_ang = 0.0873;		
 max_ang = 0.2618;		% 15 deg
 
-%  delta_angle = (rand()*max_ang) + min_ang;
-delta_angle = min_ang;
-ndirs = 8;
+delta_angle = (rand()*max_ang) + min_ang;
+%  delta_angle = min_ang;
+ndirs = 18;
 
 min_dist = 5;
 max_dist = 15;
 
 while(1)
   localScan;
-%    delta_dist = (rand()*max_dist) + min_dist;
-  delta_dist = 10;
+  delta_dist = (rand()*max_dist) + min_dist;
+%    delta_dist = 10;
   del_ind = 0;
   r_scan_dist = r_scan_dist - 10;			% Note: See comment in the comments section.
   pickPriorityAng;

@@ -3,7 +3,7 @@
 % other and within the padded map.
 %---------------------------------------------------
 
-padlen = 10;
+padlen = 5;
 
 % Finds the left, lowermost corner and right, topmost corner of the padded map
 min_x = min(new_map(:, 1));

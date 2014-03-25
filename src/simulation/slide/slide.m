@@ -11,8 +11,8 @@ function move_pt = slide(pad_inpolygonMapformatX, pad_inpolygonMapformatY, pad_m
     prev_spos = spos;
     
     [spos_new sang sdir] = move(spos, sang, sdir, sdist, 0, 0);
-    lines = [[spos(1) spos(2)];  [spos_new(1) spos_new(2)]];
-    line(lines(:,1), lines(:,2), 'lineWidth', 2, 'Color', 'b');
+%      lines = [[spos(1) spos(2)];  [spos_new(1) spos_new(2)]];
+%      line(lines(:,1), lines(:,2), 'lineWidth', 2, 'Color', 'b');
 
     checkIn;
     selMapline;				% gets pt_left, pt_right, cross_pt

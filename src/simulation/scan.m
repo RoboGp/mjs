@@ -5,6 +5,7 @@
 
 botpos = r_pos(1, :);
 botang = r_ang;
+
 ultraScan;
 r_scan_dist = distances;
 

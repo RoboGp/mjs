@@ -1,17 +1,15 @@
 %---------------------------------------------------
 % CHECK FOR CONVERGENCE
 %---------------------------------------------------
-function convg_result = checkConvg(particle, nparticles, convg_thresh)
-  
-  sum = 0;
-  convg_result = 0;
-  
-  for i = nparticles:nparticles/2
-    sum += particle(i).weight;
-  end
-  
-  if(sum >= convg_thresh)
-    convg_result = 1;
-  end
-  
+
+std_x = std(pos(:, 1), 1);
+std_y = std(pos(:, 2), 1);
+std_ang = std(ang, 1);
+
+
+disp(['iteration: ' num2str(iterations) ' x: ' num2str(std_x) ' y: ' num2str(std_y) ' angle: ' num2str(std_ang)])
+
+if(std_x + std_y <=  0.000000005)
+  drawAll;
+  break;
 end

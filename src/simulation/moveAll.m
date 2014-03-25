@@ -3,7 +3,6 @@
 % Parameters that should be allocated before the script is called.
 % r_ang, r_pos
 %
-clc
 robotRepos;				% We get the new delta_angle and movedist from here.
 
 inside = checkPoint(delta_angle, r_ang, r_pos, movedist, pad_map_lines, pad_inpolygonMapformatX, pad_inpolygonMapformatY);

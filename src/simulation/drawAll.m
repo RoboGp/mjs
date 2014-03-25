@@ -7,7 +7,7 @@ option = DRAW_ROBOT;
 drawBot;
 
 part_pos = pos;
-jitter = 4;
+jitter = 1;
 for ind = 1:nparticles
   part_pos(ind, 1) = pos(ind, 1) + ((rand() - rand())/jitter);
   part_pos(ind, 2) = pos(ind, 2) + ((rand() - rand())/jitter);

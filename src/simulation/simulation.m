@@ -7,6 +7,7 @@ axis equal;
 %---------------------------------------------------
 % Initialisations
 %---------------------------------------------------
+tic
 declareGlobals
 init
 
@@ -28,29 +29,35 @@ init
 %  %    pause(1);
 %    hold off;
 %  end
-for iterations = 1:100
-  scan;
+
+iterations = 0;
+scan;
   correctShift;
+for iterations = 1:100
+
+  for nmovs = 1:1
+    moveAll;
+    scan;
+    correctShift;
+  end
+
+  if(mod(iterations, 20) == 0)
+    close all;
+  end
+    
 
   assignWeights;
   sortParticles;
   
   particleSelection;
   assignWeights;
-
-  for nmovs = 1:1
-    moveAll;
-  end
-
-  if(mod(iterations, 20) == 0)
-    close all;
-  end
   
   drawAll;
+  checkConvg;
 end
-
+toc
 %    
-%    check = checkConvg(particle, nparticles);
+%    
 %  end
 %  
 %  %---------------------------------------------------

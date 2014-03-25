@@ -1,7 +1,7 @@
 %---------------------------------------------------
 % configuration variables
 %---------------------------------------------------
-nscans = 8;
+nscans = 18;
 nparticles = 70;
 
 
@@ -29,6 +29,7 @@ for i =1:length(pad_map_lines)
 end
 
 genParticlePos;
+nparticles
 drawMap;
 %---------------------------------------------------
 % Each bot is allocated the following variables.
