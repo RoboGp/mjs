@@ -1,11 +1,5 @@
-close all;
-clc;
-
-figure();
-hold on;
-
-goal_pos = [80, 80];
-cur_pos = [20, 20];
+goal_pos = [5 100];
+cur_pos = fpos;
 
 node_graph = [];
 vis_graph = [];
@@ -47,7 +41,10 @@ for i = 1:nlen
   
 end
 
-connections
+%  connections
 distances(:, nlen) = graph(:, 5);
 
 astar;
+path = fliplr(path);
+path = node_graph(path, :);
+%  path(:, :)

@@ -54,7 +54,6 @@ openList = [openList; currentNode currentNode graph(currentNode, 3) graph(curren
 openCount = 1;
 %closeCount = 1;
 
-tic
 while (currentNode ~= graph(nNodes, 1))
     exp_array = [];
     for i = 1:nNodes 
@@ -91,8 +90,13 @@ while (currentNode ~= graph(nNodes, 1))
     openList(index_min_node, 6) = 0;
     openList(index_min_node, 5) = inf;
 end
-toc
-current = openList(end, 1)
+
+current = openList(end, 1);
+
+index = 1;
+path(index) = current;
 while (current ~= openList(1, 1))
-    current = openList(find(current == openList(:,1)), 2)
+    current = openList(find(current == openList(:,1)), 2);
+    index = index + 1;
+    path(index) = current;
 end
