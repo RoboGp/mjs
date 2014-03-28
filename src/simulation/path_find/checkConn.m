@@ -1,4 +1,4 @@
-check = 0;
+check_conn = 0;
 lineseg = [one, two];
 
 botpos_mat = repmat(one, length(pad_map_lines), 1); 		% (repeat matrix) preallocate for speed
@@ -10,16 +10,17 @@ distSQ = sum((cps - botpos_mat).^2, 2);
 
 index = sort_index(1);
 
-if (cps(index, 1) == node_graph(i, 1) && cps(index, 2) == node_graph(i, 2))
-  index = sort_index(2);
-end
+for k = 1:length(cps)
+  if (cps(sort_index(k), 1) == node_graph(i, 1) && cps(sort_index(k), 2) == node_graph(i, 2))
+    continue;
+  end
 
-if (cps(index, 1) == node_graph(j, 1) && cps(index, 2) == node_graph(j, 2))
-  check = 1;
-end
-
-if(i==2)
-  [one two check]
-  cps(sort_index, :)
+  if(cartDist(node_graph(i, 1), node_graph(i, 2), node_graph(j, 1), node_graph(j, 2)) <= cartDist(node_graph(i, 1), node_graph(i, 2), cps(sort_index(k), 1), cps(sort_index(k), 2)))
+    check_conn = 1;
+    break;
+  else
+    check_conn = 0;
+    break;
+  end  
 end
 

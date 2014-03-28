@@ -29,7 +29,6 @@ for iterations = 1:100
     close all;
   end
     
-
   assignWeights;
   sortParticles;
   
@@ -42,12 +41,13 @@ for iterations = 1:100
   if(done)
     break;
   end
+  
 end
 
-[fval findex] = max(weight);
-fpos = pos(findex, :);
-fang = ang(findex);
-fdir = dir(findex, :);
+
+figure();
+hold on;
+drawMap;
 
 moveToGoal;
 toc

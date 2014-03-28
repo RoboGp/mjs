@@ -29,7 +29,6 @@ for i =1:length(pad_map_lines)
 end
 
 genParticlePos;
-nparticles
 drawMap;
 %---------------------------------------------------
 % Each bot is allocated the following variables.

@@ -4,8 +4,8 @@
 %---------------------------------------------------
 
 % Initialise Robot
-r_pos = [5 5];
-r_ang = degtorad(180);
+r_pos = [10 10];
+r_ang = degtorad(90);
 r_dir = [cos(r_ang) sin(r_ang)];
 
 option = DRAW_ROBOT;

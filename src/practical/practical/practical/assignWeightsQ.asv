@@ -1,0 +1,18 @@
+total_weight = 0;
+likelihood = zeros(nscans, nparticles);
+constant = 0.00000000001;
+
+for i = 1:nscans
+%       likelihood(i,:) = ((1/sqrt(2*pi*std(shift_dist(i, :)).^2)))*gaussmf(shift_dist(i, :), [std(shift_dist(i, :))+1 r_scan_dist_1(i)]);
+%        likelihood(i,:) = ((1/sqrt(2*pi*25))*gaussmf(shift_dist(i, :), [5 r_scan_dist_1(i)]);
+%      if(i > 1)
+%          likelihood(i,:) = bsxfun(@times, likelihood(i,:), likelihood(i - 1,:));
+%      end
+end
+
+weight = mean(likelihood, 1) + constant;
+% weight = likelihood(nscans, :) + constant;
+weight = weight.^2;
+
+weight = weight' ./ sum(weight);
+

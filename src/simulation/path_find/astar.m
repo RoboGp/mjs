@@ -94,6 +94,7 @@ end
 current = openList(end, 1);
 
 index = 1;
+path = [];
 path(index) = current;
 while (current ~= openList(1, 1))
     current = openList(find(current == openList(:,1)), 2);

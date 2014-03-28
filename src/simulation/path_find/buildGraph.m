@@ -1,4 +1,4 @@
-goal_pos = [5 100];
+goal_pos = [80 80];
 cur_pos = fpos;
 
 node_graph = [];
@@ -30,7 +30,7 @@ for i = 1:nlen
     end
     
     checkConn;
-    if(check)
+    if(check_conn)	
       connections(i, j) = 1;
       distances(i, j) = sqrt((node_graph(i, 1) - node_graph(j, 1))^2 + (node_graph(i, 2) - node_graph(j, 2))^2);
       connections(j, i) = 1;

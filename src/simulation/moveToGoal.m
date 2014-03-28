@@ -1,6 +1,7 @@
-figure();
-hold on;
-drawMap;
+[fval findex] = max(weight);
+fpos = pos(findex, :);
+fang = ang(findex);
+fdir = dir(findex, :);
 
 lineLength = 5;
 buildGraph;
@@ -22,3 +23,4 @@ for i = 1:length(path)-1
   line(trajs(:,1), trajs(:,2), 'lineWidth', 2, 'Color', 'y'); 	% draws arena
 end
 
+actual;

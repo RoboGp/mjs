@@ -1,0 +1,29 @@
+26-03-14
+=========
+Shifted the ultra scan readings by 1.
+Using the mean of two scans.
+
+Likelihood - dividing by the abs(difference of shifted(p) and scanned(r) readings)
+
+weights == sum of likelihood.
+[Higher the difference, Lesser the weight]
+
+Testing correct shift - averaging between -1 & -2
+
+
+No movement + Weight distribution test
+==============
+Lower std seems to help == 8 (better than 10)
+
+Placed robot near a corner of the arena - the particle at the corner of the map should have had similar readings 
+[very close to 2 of the arena walls]
+Readings along diagonals seem to mess up the right particle's likelihood of having the highest weight.
+
+
+normpdf is making a huge difference. Works well with std dev == 8.
+
+Best particle estimation - pick the best out of the neighbourhood having more nuber of particles.
+
+Amongst the top 'x' best particles, pick the estimate with the highest number of particles in its neighbourhood or highest sum(weight)
+
+

@@ -6,9 +6,9 @@ else
 %    scatter(pos(:, 1), pos(:, 2), 5, 50, 'LineWidth', 2);
   scatter(pos(:, 1), pos(:, 2));
   
-  for jack = 1:nparticles
-    line([pos(jack,1) pos(jack, 1)+ dir(jack, 1)*lineLength], [pos(jack,2) pos(jack,2)+dir(jack,2)*lineLength]);
-  end
+%   for jack = 1:nparticles
+%     line([pos(jack,1) pos(jack, 1)+ dir(jack, 1)*lineLength], [pos(jack,2) pos(jack,2)+dir(jack,2)*lineLength]);
+%   end
 end
 
   
