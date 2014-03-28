@@ -9,6 +9,9 @@ index_min_err_shift = i*zeros(1, nparticles);
 shift_dist = scan_dist;
 mat_scan_shift = scan_dist;
 for i = 1:nscans
+    if(iterations > 0 && i == 9)
+      continue;
+    end
     mat_scan_diff = bsxfun(@minus, rep_r_scan_dist_1, mat_scan_shift);
     mat_scan_diff = bsxfun(@times, mat_scan_diff, mat_scan_diff);
     sq_err = sum(mat_scan_diff, 1);
@@ -31,7 +34,8 @@ else
     index_min_err_shift = (index_min_err_shift - 1) * (360/nscans);
     index_min_err_shift = degtorad(index_min_err_shift);
     
-    ang = bsxfun(@minus, ang, bsxfun(@times, index_min_err_shift, index_min_err_shift~=round(nscans/2)));
+%      ang = bsxfun(@minus, ang, bsxfun(@times, index_min_err_shift, index_min_err_shift~=round(nscans/2)));
+    ang = bsxfun(@minus, ang, index_min_err_shift);
     ang = bsxfun(@mod, ang, 2*pi*ones(nparticles,1));
     dir = [cos(ang) sin(ang)];
 end

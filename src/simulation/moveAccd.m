@@ -6,7 +6,11 @@
 %  3. Make change to current angle.
 %  4. Move towards goal.
 %
-function [dest angle direction] = moveAccd(src, goal, angle, direction)
+
+src = path(i, :);
+goal = path(i+1, :);
+
+%  function [dest angle direction] = moveAccd(src, goal, angle, direction)
 
 if(goal(1) > src(1) && goal(2) > src(2))		% Quadrant 1: 0 - 90 deg
     d0 = atan2(goal(2) - src(2), goal(1) - src(1));
@@ -39,4 +43,4 @@ if(goal(1) > src(1) && goal(2) > src(2))		% Quadrant 1: 0 - 90 deg
   [angle direction] = turn(angle, d0, direction, 0);
   [dest angle direction] = move(src, angle, direction, move_dist, 0, 0);
   
-end
+%  end

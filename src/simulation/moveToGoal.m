@@ -3,6 +3,9 @@ fpos = pos(findex, :);
 fang = ang(findex);
 fdir = dir(findex, :);
 
+disp(['Estimated position: ' num2str(fpos(1)) ', ' num2str(fpos(2)) '  theta: ' num2str(radtodeg(fang))]);
+disp(['Actual position: ' num2str(r_pos(1)) ', ' num2str(r_pos(2))  '  theta: ' num2str(radtodeg(r_ang))]);
+
 lineLength = 5;
 buildGraph;
 
@@ -13,7 +16,9 @@ angle = fang;
 direction = fdir;
 
 for i = 1:length(path)-1
-  [dest angle direction] = moveAccd(path(i, :), path(i+1, :), angle, direction);
+  
+  moveAccd;
+%    [dest angle direction] = moveAccd(, , angle, direction);
   
   plot(dest(1), dest(2), 'bo', 'LineWidth', 3, 'MarkerSize', 5);
   line([dest(1) dest(1)+direction(1)*lineLength], [dest(2) dest(2)+direction(2)*lineLength]);
@@ -22,7 +27,5 @@ for i = 1:length(path)-1
   
   line(trajs(:,1), trajs(:,2), 'lineWidth', 2, 'Color', 'y'); 	% draws arena
 end
-
-disp(['Estimated virtual robot position: ' num2str(dest(1)) ', ' num2str(dest(2)) ]);
 
 %  actual;

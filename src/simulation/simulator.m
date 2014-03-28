@@ -32,7 +32,7 @@ for iterations = 1:100
   particleSelection;
   assignWeights;
   
-  if(mod(iterations, 3) == 0)
+  if(mod(iterations, 4) == 0)
     drawAll;
   end
   checkConvg;
