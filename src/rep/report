@@ -1,0 +1,26 @@
+1. Motors do not start and stop at the same time
+
+
+Simulation
+1. Figuring out the right nscans so that the circular-shift error is minimal.
+
+Estimation strategy
+Sensor modelling
+obstacle overcame
+
+Conclusion
+precision and speed.
+
+Introduction
+Task I) Develop a localisation system that takes the robot from a random initial place in the arena to a specific target location.
+
+Clarity of presentation of results, solution's creativity, completeness of the overall approach taken, etc.
+   
+Do talk about any sensor/actuator modelling, robot design issues, challenges faced, etc.
+Do include images/diagrams illustrating how your approach works.
+
+*IMPORTANT: On the front cover you must include:
+a) team's name
+b) individual team member names
+c) individual agreed respective contribution percentage
+d) a sentence per team member describing what that team member did.

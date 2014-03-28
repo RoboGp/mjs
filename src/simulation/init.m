@@ -4,7 +4,8 @@
 %---------------------------------------------------
 
 % Initialise Robot
-r_pos = [10 10];
+%  r_pos = [10 10];
+r_pos = S;
 r_ang = degtorad(90);
 r_dir = [cos(r_ang) sin(r_ang)];
 

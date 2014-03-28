@@ -1,4 +1,5 @@
-goal_pos = [80 80];
+%  goal_pos = [80 80];
+goal_pos = T;
 cur_pos = fpos;
 
 node_graph = [];

@@ -3,9 +3,9 @@ close all;
 drawMap;
 hold on;
 
-spos = [25, 50];
-sang = degtorad(180);
-sdist = 200;
+spos = [50, 35];
+sang = degtorad(125);
+sdist = 100;
 sang = mod(sang, 2*pi);
 sdir = [cos(sang) sin(sang)];
 

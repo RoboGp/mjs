@@ -1,6 +1,3 @@
-clc;
-clear all;
-
 hold on;
 axis equal;
 
@@ -25,9 +22,9 @@ for iterations = 1:100
     correctShift;
   end
 
-  if(mod(iterations, 20) == 0)
-    close all;
-  end
+%    if(mod(iterations, 20) == 0)
+%      close all;
+%    end
     
   assignWeights;
   sortParticles;
@@ -35,7 +32,9 @@ for iterations = 1:100
   particleSelection;
   assignWeights;
   
-  drawAll;
+  if(mod(iterations, 3) == 0)
+    drawAll;
+  end
   checkConvg;
   
   if(done)
